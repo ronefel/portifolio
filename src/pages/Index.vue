@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Gallery :images="images"/>
+    <div>Galeria 1</div>
+    <Gallery :images="images" id="images"/>
+    <div>Galeria 2</div>
+    <Gallery :images="img" id="img"/>
   </div>
 </template>
 
@@ -15,34 +18,123 @@ export default {
     return {
       images: [
         {
-          title: 'title 1',
-          description: 'des 1',
-          href: 'https://images.wallpaperscraft.com/image/castle_neuschwanstein_castle_architecture_126354_1280x720.jpg' },
+          title: 'Galeria 1 title 1',
+          href: 'https://source.unsplash.com/random/?tech' },
         {
-          title: 'title 2',
-          description: 'des 2',
-          href: 'https://images.unsplash.com/photo-1542029575035-80c8b9d031f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+          title: 'Galeria 1 title 2',
+          href: 'https://source.unsplash.com/random/?care'
         },
         {
-          title: 'title 1',
-          description: 'des 1',
-          href: 'https://images.unsplash.com/photo-1553264646-7eb44743436f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1317&q=80' },
-        {
-          title: 'title 2',
-          description: 'des 2',
-          href: 'https://images.unsplash.com/photo-1553259055-b2175537e16a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
+          title: 'Galeria 1 title 3',
+          href: 'https://source.unsplash.com/random/?substance'
         },
         {
-          title: 'title 1',
-          description: 'des 1',
-          href: 'https://images.unsplash.com/photo-1548869445-714864c0d6ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' },
+          title: 'Galeria 1 title 4',
+          href: 'https://source.unsplash.com/random/?choose'
+        },
         {
-          title: 'title 2',
-          description: 'des 2',
-          href: 'https://images.unsplash.com/photo-1465420513954-e331ffa275ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+          title: 'Galeria 1 title 5',
+          href: 'https://source.unsplash.com/random/?past' },
+        {
+          title: 'Galeria 1 title 6',
+          href: 'https://source.unsplash.com/random/?lamp'
+        },
+        {
+          title: 'Galeria 1 title 2',
+          href: 'https://source.unsplash.com/random/?care'
+        },
+        {
+          title: 'Galeria 1 title 3',
+          href: 'https://source.unsplash.com/random/?substance'
+        },
+        {
+          title: 'Galeria 1 title 4',
+          href: 'https://source.unsplash.com/random/?choose'
+        },
+        {
+          title: 'Galeria 1 title 5',
+          href: 'https://source.unsplash.com/random/?past' },
+        {
+          title: 'Galeria 1 title 6',
+          href: 'https://source.unsplash.com/random/?lamp'
+        },
+        {
+          title: 'Galeria 1 title 2',
+          href: 'https://source.unsplash.com/random/?care'
+        },
+        {
+          title: 'Galeria 1 title 3',
+          href: 'https://source.unsplash.com/random/?substance'
+        },
+        {
+          title: 'Galeria 1 title 4',
+          href: 'https://source.unsplash.com/random/?choose'
+        },
+        {
+          title: 'Galeria 1 title 5',
+          href: 'https://source.unsplash.com/random/?past' },
+        {
+          title: 'Galeria 1 title 6',
+          href: 'https://source.unsplash.com/random/?lamp'
+        },
+        {
+          title: 'Galeria 1 title 2',
+          href: 'https://source.unsplash.com/random/?care'
+        },
+        {
+          title: 'Galeria 1 title 3',
+          href: 'https://source.unsplash.com/random/?substance'
+        },
+        {
+          title: 'Galeria 1 title 4',
+          href: 'https://source.unsplash.com/random/?choose'
+        },
+        {
+          title: 'Galeria 1 title 5',
+          href: 'https://source.unsplash.com/random/?past' },
+        {
+          title: 'Galeria 1 title 6',
+          href: 'https://source.unsplash.com/random/?lamp'
+        },
+        {
+          title: 'Galeria 1 title 6',
+          href: 'https://source.unsplash.com/random/?lamp'
+        },
+        {
+          title: 'Galeria 1 title 6',
+          href: 'https://source.unsplash.com/random/?lamp'
+        }
+      ],
+      img: [
+        {
+          title: 'Galeria 2 title 1',
+          href: 'https://source.unsplash.com/random/?tech,care' },
+        {
+          title: 'Galeria 2 title 2',
+          href: 'https://source.unsplash.com/random/?tech,studied'
+        },
+        {
+          title: 'Galeria 2 title 3',
+          href: 'https://source.unsplash.com/random/?tech,substance'
+        },
+        {
+          title: 'Galeria 2 title 4',
+          href: 'https://source.unsplash.com/random/?tech,choose'
+        },
+        {
+          title: 'Galeria 2 title 5',
+          href: 'https://source.unsplash.com/random/?tech,past' },
+        {
+          title: 'Galeria 2 title 6',
+          href: 'https://source.unsplash.com/random/?tech,lamp'
         }
       ]
     }
   }
 }
 </script>
+<style>
+body{
+  background: #222222;
+}
+</style>

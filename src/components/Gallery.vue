@@ -1,34 +1,28 @@
 <template>
-<div class="row" v-if="images != undefined && images.length > 0">
-      <div class="col-12" v-if="images.length >= 5">
-        <div class="row">
-          <div
-            :id="id"
-            class="blueimp-gallery blueimp-gallery-controls"
-          >
-            <div class="slides"></div>
-            <!-- <h3 class="title"></h3> -->
-            <a class="prev">
-              <slot name="prev">‹</slot>
-            </a>
-            <a class="next">
-              <slot name="next">›</slot>
-            </a>
-            <a class="close">
-              <slot name="close">X</slot>
-            </a>
-            <ol class="indicator"></ol>
-            <a class="play-pause"></a>
-          </div>
-          <img
-            v-for="(image, i) in images"
-            :key="i"
-            @click="index = i"
-            class="img"
-            :src="image.href"/>
+<div class="" v-if="images != undefined && images.length > 0">
+  <div :id="id" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">
+      <slot name="prev">‹</slot>
+    </a>
+    <a class="next">
+      <slot name="next">›</slot>
+    </a>
+    <a class="close">
+      <slot name="close">X</slot>
+    </a>
+    <ol class="indicator"></ol>
+    <a class="play-pause"></a>
+  </div>
+    <div class="gallery" :id="'gallery-'+id">
+      <div class="gallery-item" v-for="(image, i) in images" :key="i" @click="index = i">
+        <div class="content">
+          <img :src="image.href">
         </div>
       </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -76,8 +70,6 @@ export default {
       }
     }
   },
-  mounted () {
-  },
   destroyed () {
     if (this.instance !== null) {
       this.instance.destroyEventListeners()
@@ -114,52 +106,72 @@ export default {
     },
     close () {
       this.index = null
+    },
+    getVal (elem, style) {
+      return parseInt(window.getComputedStyle(elem).getPropertyValue(style))
+    },
+    getHeight (item) {
+      return item.querySelector('.content').getBoundingClientRect().height
+    },
+    resizeAll () {
+      console.log('chamou')
+      let gallery = document.querySelector(`#gallery-${this.id}`)
+      let altura = this.getVal(gallery, 'grid-auto-rows')
+      let gap = this.getVal(gallery, 'grid-row-gap')
+      gallery.querySelectorAll('.gallery-item').forEach((item) => {
+        let el = item
+        el.style.gridRowEnd = 'span ' + Math.ceil(((this.getHeight(item) + gap) / (altura + gap)) - 1)
+      })
     }
+  },
+  mounted () {
+    const gallery = document.querySelector(`#gallery-${this.id}`)
+    gallery.querySelectorAll('img').forEach(function (item) {
+      item.classList.add('byebye')
+      if (item.complete) {
+        console.log(item.src)
+      } else {
+        item.addEventListener('load', () => {
+          let altura = parseInt(window.getComputedStyle(gallery).getPropertyValue('grid-auto-rows'))
+          let gap = parseInt(window.getComputedStyle(gallery).getPropertyValue('grid-row-gap'))
+          let gitem = item.parentElement.parentElement
+          gitem.style.gridRowEnd = 'span ' + Math.ceil((gitem.querySelector('.content').getBoundingClientRect().height + gap) / (altura + gap))
+          item.classList.remove('byebye')
+        })
+      }
+    })
+    window.addEventListener('resize', this.resizeAll)
+    gallery.querySelectorAll('.gallery-item').forEach(function (item) {
+      item.addEventListener('click', function () {
+        item.classList.toggle('full')
+      })
+    })
+    this.resizeAll()
   }
 }
 </script>
 
 <style scoped>
-@media (max-width: 768px) {
-  .img-left {
-    height: 365px;
-    max-width: 100%;
-    min-width: 100%;
-  }
-  .img-right {
-    height: 350px;
-  }
-  .img-right {
-    display: none;
-  }
+.gallery {
+  display: grid;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 8px;
 }
-.blueimp-gallery > .description {
-  position: absolute;
-  top: 30px;
-  left: 15px;
-  color: #fff;
-  display: none;
+.gallery img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 16px #333;
+  transition: all 1.5s ease;
 }
-.blueimp-gallery-controls > .description {
-  display: block;
+.gallery .content {
+  padding: 4px;
 }
-.blueimp-gallery > .next,
-.blueimp-gallery > .prev {
-  color: #fff !important;
-  background: transparent;
-  border: 0px;
-  opacity: 0.8;
-  font-size: 90px;
-  font-weight: 100;
-}
-.blueimp-gallery > .close,
-.blueimp-gallery > .title {
-  color: #fff !important;
-  opacity: 0.7;
-}
-.img{
-  height: 200px;
-  margin: 5px;
+.gallery .gallery-item {
+  transition: grid-row-start 300ms linear;
+  transition: transform 300ms ease;
+  transition: all 0.5s ease;
   cursor: pointer;
 }
 </style>
