@@ -1,16 +1,22 @@
 <template>
-  <div class="row">
-    <div class="col-xs-12">
-      <div>Galeria 1</div>
-      <Gallery :images="images" id="images"/>
-      <div>Galeria 2</div>
-      <Gallery :images="img" id="img"/>
+  <div class="page-index q-pa-sm">
+    <div class="row">
+      <div class="col-xs-12 q-pb-xl">
+        <h5>Galeria 1</h5>
+        <Gallery :images="images" id="images"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 q-pb-xl">
+        <h5>Galeria 2</h5>
+        <Gallery :images="img" id="img"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Gallery from '../components/Gallery'
+import Gallery from '../components/Gallery2'
 export default {
   name: 'Index',
   components: {
@@ -138,5 +144,6 @@ export default {
 <style>
 body{
   background: #222222;
+  color: #ffffff;
 }
 </style>
