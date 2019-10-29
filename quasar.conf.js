@@ -44,10 +44,14 @@ module.exports = function (ctx) {
       all: 'auto',
 
       components: [],
-      directives: [],
+      directives: [
+        'TouchPan'
+      ],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'AppFullscreen'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
@@ -86,7 +90,7 @@ module.exports = function (ctx) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
-      https: true,
+      // https: true,
       // port: 8080,
       open: 'Chrome' // opens browser window automatically
     },

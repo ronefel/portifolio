@@ -1,16 +1,13 @@
 <template>
 <div class="" v-if="images != undefined && images.length > 0">
-  <div :id="id" class="blueimp-gallery blueimp-gallery-controls">
-    <div class="slides"></div>
-    <h3 class="title"></h3>
-    <a class="prev">
-      <slot name="prev">‹</slot>
-    </a>
-    <a class="next">
-      <slot name="next">›</slot>
-    </a>
+  <div :id="id" class="blueimp-gallery blueimp-gallery-display" :class="[showControls ? 'blueimp-gallery-controls' : '']" style="display: none;">
+    <div class="slides" id="slides"></div>
+    <img class="logo" src="https://www.kchilites.com/skin/frontend/kchilites/default/images/branding/logo-kc-yellow-480-minimal.png"/>
+    <h3 class="title bottom"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
     <a class="close">
-      <slot name="close">X</slot>
+      <slot name="close">✖</slot>
     </a>
     <ol class="indicator"></ol>
     <a class="play-pause"></a>
@@ -27,10 +24,12 @@
 
 <script>
 import 'blueimp-gallery/css/blueimp-gallery.min.css'
-import 'blueimp-gallery/js/blueimp-gallery-fullscreen.js'
+// import 'blueimp-gallery/js/blueimp-gallery-fullscreen.js'
 import 'blueimp-gallery/js/blueimp-gallery-video.js'
 import 'blueimp-gallery/js/blueimp-gallery-youtube.js'
 import blueimp from 'blueimp-gallery/js/blueimp-gallery.js'
+
+import { AppFullscreen } from 'quasar'
 
 export default {
   name: 'Gallery',
@@ -55,19 +54,23 @@ export default {
   data () {
     return {
       instance: null,
-      index: null
+      index: null,
+      showControls: false,
+      mousemove: false
     }
   },
   watch: {
     index (value) {
       if (value !== null) {
+        AppFullscreen.request()
         this.open(value)
       } else {
-        if (this.instance) {
-          this.instance.close()
-        }
         this.close()
+        AppFullscreen.exit()
       }
+    },
+    mousemove (value) {
+      console.log(value)
     }
   },
   destroyed () {
@@ -135,7 +138,7 @@ export default {
           let altura = parseInt(window.getComputedStyle(gallery).getPropertyValue('grid-auto-rows'))
           let gap = parseInt(window.getComputedStyle(gallery).getPropertyValue('grid-row-gap'))
           let gitem = item.parentElement.parentElement
-          gitem.style.gridRowEnd = 'span ' + Math.ceil((gitem.querySelector('.content').getBoundingClientRect().height + gap) / (altura + gap))
+          gitem.style.gridRowEnd = 'span ' + Math.ceil(((gitem.querySelector('.content').getBoundingClientRect().height + gap) / (altura + gap)) - 1)
           item.classList.remove('byebye')
         })
       }
@@ -145,6 +148,19 @@ export default {
       item.addEventListener('click', function () {
         item.classList.toggle('full')
       })
+    })
+    document.getElementById('slides').addEventListener('mousemove', () => {
+      this.mousemove = true
+    })
+    document.getElementById('slides').addEventListener('mousedown', () => {
+      this.mousemove = false
+    })
+    document.getElementById('slides').addEventListener('mouseup', () => {
+      if (!this.mousemove) {
+        this.showControls = !this.showControls
+      } else {
+        this.mousemove = false
+      }
     })
     this.resizeAll()
   }
@@ -173,5 +189,21 @@ export default {
   transition: transform 300ms ease;
   transition: all 0.5s ease;
   cursor: pointer;
+}
+.blueimp-gallery>.bottom {
+  bottom: 15px;
+  top: unset;
+}
+.blueimp-gallery>.logo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  opacity: 1;
+  display: block;
+  height: 60px;
+}
+.blueimp-gallery>.next, .blueimp-gallery>.prev {
+  background: none;
+  border: none;
 }
 </style>
