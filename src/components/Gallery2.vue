@@ -53,7 +53,9 @@ export default {
       instance: null,
       index: null,
       showControls: false,
-      mousemove: false
+      mousemove: false,
+      urlAtual: 0,
+      pushState: 0
     }
   },
   watch: {
@@ -66,6 +68,13 @@ export default {
         if (this.instance !== null) {
           this.instance.close()
           AppFullscreen.exit()
+        }
+      }
+    },
+    '$q.fullscreen.isActive' (value) {
+      if (!value) {
+        if (this.instance !== null) {
+          this.instance.close()
         }
       }
     }
@@ -100,16 +109,9 @@ export default {
         this.options
       )
       this.instance = instance(this.images, options)
-      this.push()
     },
     onSlideCustom (index, slide) {
       this.$emit('onslide', { index, slide })
-    },
-    push () {
-      console.log(window.history.previous.href)
-      let url = '#' + window.location.pathname
-      history.pushState({}, null, url)
-      console.log('pushad')
     }
   },
   mounted () {
@@ -126,11 +128,6 @@ export default {
         this.mousemove = false
       }
     })
-    window.addEventListener('popstate', () => {
-      if (this.instance !== null) {
-        this.instance.close()
-      }
-    }, false)
   }
 }
 </script>
