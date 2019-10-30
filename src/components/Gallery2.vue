@@ -58,16 +58,16 @@ export default {
   },
   watch: {
     index (value) {
+      console.log('index', value)
       if (value !== null) {
         AppFullscreen.request()
         this.open(value)
       } else {
-        this.close()
-        AppFullscreen.exit()
+        if (this.instance !== null) {
+          this.instance.close()
+          AppFullscreen.exit()
+        }
       }
-    },
-    mousemove (value) {
-      console.log(value)
     }
   },
   destroyed () {
@@ -94,18 +94,22 @@ export default {
             this.$emit('onslideend', { index, slide }),
           onslidecomplete: (index, slide) =>
             this.$emit('onslidecomplete', { index, slide }),
-          onclose: () => this.close(),
+          onclose: () => { this.index = null },
           onclosed: () => this.$emit('onclosed')
         },
         this.options
       )
       this.instance = instance(this.images, options)
+      this.push()
     },
     onSlideCustom (index, slide) {
       this.$emit('onslide', { index, slide })
     },
-    close () {
-      this.index = null
+    push () {
+      console.log(window.history.previous.href)
+      let url = '#' + window.location.pathname
+      history.pushState({}, null, url)
+      console.log('pushad')
     }
   },
   mounted () {
@@ -122,6 +126,11 @@ export default {
         this.mousemove = false
       }
     })
+    window.addEventListener('popstate', () => {
+      if (this.instance !== null) {
+        this.instance.close()
+      }
+    }, false)
   }
 }
 </script>
@@ -133,7 +142,7 @@ export default {
   flex-wrap: wrap;
 }
 .gallery-item {
-  flex-grow:1;
+  flex-grow: 1;
   padding: .16rem;
 }
 .gallery-item img {
