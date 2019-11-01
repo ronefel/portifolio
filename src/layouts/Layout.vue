@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout class="index-layout" view="lHh Lpr lFf">
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -15,3 +15,9 @@ export default {
   }
 }
 </script>
+<style lang="stylus" scoped>
+.index-layout{
+  background: #222222;
+  color: #ffffff;
+}
+</style>

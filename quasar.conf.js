@@ -53,9 +53,6 @@ module.exports = function (ctx) {
         'AppFullscreen'
       ],
       config: {
-        cordova: {
-          backButtonExit: true/false
-        }
       }
     },
 
