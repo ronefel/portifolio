@@ -14,8 +14,8 @@
         </q-toolbar-title>
 
         <div>
-          <q-icon name="ion-logo-instagram" style="font-size: 2rem;" />
-          <q-icon name="ion-logo-facebook" style="font-size: 2rem;" />
+          <q-icon class="logo-social logo-instagram" name="fab fa-instagram" />
+          <q-icon class="logo-social logo-facebook" name="fab fa-facebook-f" />
         </div>
       </q-toolbar>
     </q-header>
@@ -97,5 +97,16 @@ export default {
 }
 .q-item--active {
   color: #e3b24f;
+}
+.logo-social {
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 20px;
+}
+.logo-instagram:hover {
+  background-color: #f44747;
+}
+.logo-facebook:hover {
+  background-color: #3c5a99;
 }
 </style>

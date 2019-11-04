@@ -2,7 +2,7 @@
 <div class="" v-if="images != undefined && images.length > 0">
   <div :id="id" class="blueimp-gallery blueimp-gallery-display" :class="[showControls ? 'blueimp-gallery-controls' : '']" style="display: none;">
     <div class="slides" id="slides"></div>
-    <img class="logo" src="https://www.kchilites.com/skin/frontend/kchilites/default/images/branding/logo-kc-yellow-480-minimal.png"/>
+    <img class="logo" src="img/logo1.png"/>
     <h3 class="title bottom"></h3>
     <a class="prev">‹</a>
     <a class="next">›</a>
@@ -14,7 +14,7 @@
   </div>
     <div class="gallery" :id="'gallery-'+id">
       <div class="gallery-item" v-for="(image, i) in images" :key="i" @click="index = i">
-        <img :src="image.href">
+        <img :src="image.href" :height="imgHeight">
       </div>
     </div>
 </div>
@@ -22,6 +22,7 @@
 
 <script>
 import 'blueimp-gallery/css/blueimp-gallery.min.css'
+import 'blueimp-gallery/js/blueimp-helper.js'
 import 'blueimp-gallery/js/blueimp-gallery-video.js'
 import 'blueimp-gallery/js/blueimp-gallery-youtube.js'
 import blueimp from 'blueimp-gallery/js/blueimp-gallery.js'
@@ -54,19 +55,18 @@ export default {
       index: null,
       showControls: false,
       mousemove: false,
-      urlAtual: 0,
-      pushState: 0
+      imgHeight: 200
     }
   },
   watch: {
     index (value) {
-      console.log('index', value)
       if (value !== null) {
         AppFullscreen.request()
         this.open(value)
       } else {
         if (this.instance !== null) {
-          this.instance.close()
+          this.instance.destroyEventListeners()
+          this.instance = null
           AppFullscreen.exit()
         }
       }
@@ -98,7 +98,8 @@ export default {
           index,
           onopen: () => this.$emit('onopen'),
           onopened: () => this.$emit('onopened'),
-          onslide: this.onSlideCustom,
+          onslide: (index, slide) =>
+            this.$emit('onslide', { index, slide }),
           onslideend: (index, slide) =>
             this.$emit('onslideend', { index, slide }),
           onslidecomplete: (index, slide) =>
@@ -109,9 +110,6 @@ export default {
         this.options
       )
       this.instance = instance(this.images, options)
-    },
-    onSlideCustom (index, slide) {
-      this.$emit('onslide', { index, slide })
     }
   },
   mounted () {
@@ -146,7 +144,6 @@ export default {
   display: block;
   min-width: 100%;
   max-width: 100%;
-  height: 323.248px;
   object-fit: cover;
 }
 .blueimp-gallery>.bottom {
@@ -159,7 +156,7 @@ export default {
   left: 15px;
   opacity: 1;
   display: block;
-  height: 60px;
+  height: 120px;
 }
 .blueimp-gallery>.next, .blueimp-gallery>.prev {
   background: none;

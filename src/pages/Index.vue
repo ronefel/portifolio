@@ -36,97 +36,103 @@ export default {
     return {
       images: [
         {
+          title: 'Vídeo',
+          type: 'text/html',
+          youtube: 'zi4CIXpx7Bg',
+          href: 'https://img.youtube.com/vi/zi4CIXpx7Bg/maxresdefault.jpg'
+        },
+        {
           title: 'Galeria 1 title 1',
-          href: 'https://source.unsplash.com/random/?tech' },
+          href: 'https://source.unsplash.com/random/?makeup' },
         {
           title: 'Galeria 1 title 2',
-          href: 'https://source.unsplash.com/random/?care'
+          href: 'https://source.unsplash.com/random/?makeup-flatlays'
         },
         {
           title: 'Galeria 1 title 3',
-          href: 'https://source.unsplash.com/random/?substance'
+          href: 'https://source.unsplash.com/random/?makeup-artist-tay'
         },
         {
           title: 'Galeria 1 title 4',
-          href: 'https://source.unsplash.com/random/?choose'
+          href: 'https://source.unsplash.com/random/?makeup-artist'
         },
         {
           title: 'Galeria 1 title 5',
-          href: 'https://source.unsplash.com/random/?past' },
+          href: 'https://source.unsplash.com/random/?beauty' },
         {
           title: 'Galeria 1 title 6',
-          href: 'https://source.unsplash.com/random/?lamp'
+          href: 'https://source.unsplash.com/random/?lana'
         },
         {
           title: 'Galeria 1 title 7',
-          href: 'https://source.unsplash.com/random/?care'
+          href: 'https://source.unsplash.com/random/?fashion'
         },
         {
           title: 'Galeria 1 title 8',
-          href: 'https://source.unsplash.com/random/?substance'
+          href: 'https://source.unsplash.com/random/?makeup-tools'
         },
         {
           title: 'Galeria 1 title 9',
-          href: 'https://source.unsplash.com/random/?choose'
+          href: 'https://source.unsplash.com/random/?beauty-art-concepts'
         },
         {
           title: 'Galeria 1 title 10',
-          href: 'https://source.unsplash.com/random/?past' },
+          href: 'https://source.unsplash.com/random/?just-because' },
         {
           title: 'Galeria 1 title 11',
-          href: 'https://source.unsplash.com/random/?lamp'
+          href: 'https://source.unsplash.com/random/?beauty-makeup-artist-blush-shadow-design-brushes'
         },
         {
           title: 'Galeria 1 title 12',
-          href: 'https://source.unsplash.com/random/?care'
+          href: 'https://source.unsplash.com/random/?cm-bridal'
         },
         {
           title: 'Galeria 1 title 13',
-          href: 'https://source.unsplash.com/random/?substance'
+          href: 'https://source.unsplash.com/random/?maquiagem'
         },
         {
           title: 'Galeria 1 title 14',
-          href: 'https://source.unsplash.com/random/?choose'
+          href: 'https://source.unsplash.com/random/?maquiador'
         },
         {
           title: 'Galeria 1 title 15',
-          href: 'https://source.unsplash.com/random/?past' },
+          href: 'https://source.unsplash.com/random/?beleza-maquiagem' },
         {
           title: 'Galeria 1 title 16',
-          href: 'https://source.unsplash.com/random/?lamp'
+          href: 'https://source.unsplash.com/random/?fashion-amd-make-up'
         },
         {
           title: 'Galeria 1 title 17',
-          href: 'https://source.unsplash.com/random/?care'
+          href: 'https://source.unsplash.com/random/?beauty-make-up'
         },
         {
           title: 'Galeria 1 title 18',
-          href: 'https://source.unsplash.com/random/?substance'
+          href: 'https://source.unsplash.com/random/?make-up-and-hair'
         },
         {
           title: 'Galeria 1 title 19',
-          href: 'https://source.unsplash.com/random/?choose'
+          href: 'https://source.unsplash.com/random/?make-up'
         },
         {
           title: 'Galeria 1 title 20',
-          href: 'https://source.unsplash.com/random/?past' },
+          href: 'https://source.unsplash.com/random/?makeup-pack' },
         {
           title: 'Galeria 1 title 21',
-          href: 'https://source.unsplash.com/random/?lamp'
+          href: 'https://source.unsplash.com/random/?clarena-make-up'
         },
         {
           title: 'Galeria 1 title 22',
-          href: 'https://source.unsplash.com/random/?lamp'
+          href: 'https://source.unsplash.com/random/?make-up-cosmetics'
         },
         {
           title: 'Galeria 1 title 23',
-          href: 'https://source.unsplash.com/random/?lamp'
+          href: 'https://source.unsplash.com/random/?make-up-stylist'
         }
       ],
       img: [
         {
           title: 'Galeria 2 title 1',
-          href: 'https://source.unsplash.com/random/?tech,care' },
+          href: 'https://source.unsplash.com/random/?cosmetics-makeup-skincare-fragrance' },
         {
           title: 'Galeria 2 title 2',
           href: 'https://source.unsplash.com/random/?tech,studied'
