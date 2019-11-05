@@ -2,7 +2,6 @@
 <div class="" v-if="images != undefined && images.length > 0">
   <div :id="id" class="blueimp-gallery blueimp-gallery-display" :class="[showControls ? 'blueimp-gallery-controls' : '']" style="display: none;">
     <div class="slides" id="slides"></div>
-    <img class="logo" src="img/logo1.png"/>
     <h3 class="title bottom"></h3>
     <a class="prev">‹</a>
     <a class="next">›</a>
@@ -150,16 +149,24 @@ export default {
   bottom: 15px;
   top: unset;
 }
-.blueimp-gallery>.logo {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  opacity: 1;
-  display: block;
-  height: 120px;
-}
 .blueimp-gallery>.next, .blueimp-gallery>.prev {
   background: none;
   border: none;
+}
+.blueimp-gallery>.prev {
+  left: 0px;
+}
+.blueimp-gallery>.next {
+  right: 0px;
+}
+.blueimp-gallery>.close {
+  padding: 10px;
+  right: 10px;
+  top: 10px;
+  opacity: .5;
+  margin: -10px;
+}
+.blueimp-gallery>.close:hover {
+  opacity: 1;
 }
 </style>

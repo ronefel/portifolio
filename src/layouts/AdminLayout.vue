@@ -26,28 +26,22 @@
       content-class="bg-grey-2"
     >
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
-        <q-list padding>
-          <q-item active clickable v-ripple active-class="text-primary" :to="{ name: 'galerias' }">
+        <q-list class="menu" padding>
+          <q-item v-for="(link, i) in links" :key="i"
+            clickable
+            v-ripple
+            active-class="text-primary"
+            class="item"
+            :to="{ name: link.to }">
             <q-item-section avatar>
-              <q-icon name="image" />
+              <q-icon :name="link.icon" />
             </q-item-section>
 
             <q-item-section>
-              Galerias
+              {{ link.label }}
             </q-item-section>
           </q-item>
-
-          <q-item clickable v-ripple active-class="text-prymary" :to="{ name: 'informacoes' }">
-            <q-item-section avatar>
-              <q-icon name="info" />
-            </q-item-section>
-
-            <q-item-section>
-              Informações
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple class="text-red">
+          <q-item clickable v-ripple class="item" @click="sair()">
             <q-item-section avatar>
               <q-icon name="exit_to_app" />
             </q-item-section>
@@ -62,7 +56,7 @@
       <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
         <div class="absolute-bottom bg-transparent">
           <q-avatar size="56px" class="q-mb-sm">
-            <q-img src="img/perfil.jpg" />
+            <img src="img/perfil.jpg" />
           </q-avatar>
           <div class="text-weight-bold">Krys Cardoso</div>
           <div>@krys.cardoso_makeup_artist</div>
@@ -81,7 +75,11 @@ export default {
   name: 'AdminLayout',
   data () {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
+      links: [
+        { label: 'Galerias', to: 'galerias', icon: 'image' },
+        { label: 'Informações', to: 'informacoes', icon: 'info' }
+      ]
     }
   }
 }
@@ -91,7 +89,10 @@ export default {
   background-color: #ffffff;
   color: #222222;
 }
-.q-drawer--left.q-drawer--bordered {
-    border-right: none;
+.menu .item {
+  color: #666;
+}
+.menu .item.q-router-link--exact-active {
+  background-color: #e7f1fb;
 }
 </style>

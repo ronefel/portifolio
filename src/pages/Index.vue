@@ -42,7 +42,7 @@ export default {
           href: 'https://img.youtube.com/vi/zi4CIXpx7Bg/maxresdefault.jpg'
         },
         {
-          title: 'Galeria 1 title 1',
+          title: 'Galeria 1 title 1 Galeria 1 title 1 Galeria 1 titl',
           href: 'https://source.unsplash.com/random/?makeup' },
         {
           title: 'Galeria 1 title 2',
@@ -158,10 +158,6 @@ export default {
 }
 </script>
 <style>
-body{
-  background: #222f3e;
-  color: #ffffff;
-}
 .logo-principal{
   text-align: center;
   margin-top: 15px;
