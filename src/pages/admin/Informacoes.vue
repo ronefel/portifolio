@@ -5,17 +5,14 @@
       flat
       :definitions="{
         save: {
-          tip: 'Save your work',
+          tip: 'Salvar texto',
           icon: 'save',
-          label: 'Save',
+          label: 'Salvar',
           handler: saveWork
         }
       }"
       :toolbar="[
-        ['left', 'center', 'right', 'justify'],
-        ['bold', 'italic', 'strike', 'underline'],
-        ['token', 'hr', 'link', 'custom_btn'],
-        [
+        [ 'save',
           {
             label: $q.lang.editor.formatting,
             icon: $q.iconSet.editor.formatting,
@@ -27,8 +24,7 @@
               'h3',
               'h4',
               'h5',
-              'h6',
-              'code'
+              'h6'
             ]
           },
           {
@@ -48,12 +44,12 @@
             ]
           },
           {
-            label: $q.lang.editor.defaultFont,
+            label: 'Sailec Light',
             icon: $q.iconSet.editor.font,
             fixedIcon: true,
             list: 'no-icons',
             options: [
-              'default_font',
+              'sailec_light',
               'arial',
               'arial_black',
               'comic_sans',
@@ -61,14 +57,14 @@
               'impact',
               'lucida_grande',
               'times_new_roman',
-              'verdana',
-              'sailec_light'
+              'verdana'
             ]
           }
         ],
-        ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
-
-        ['undo', 'redo'],
+        ['bold', 'italic', 'strike', 'underline'],
+        ['left', 'center', 'right', 'justify'],
+        ['unordered', 'ordered', 'outdent', 'indent'],
+        ['undo', 'redo', 'hr', 'link'],
         ['viewsource', 'removeFormat']
       ]"
       :fonts="{
@@ -96,12 +92,7 @@ export default {
   },
   methods: {
     saveWork () {
-      this.$q.notify({
-        message: 'Saved your text to local storage',
-        color: 'green-4',
-        textColor: 'white',
-        icon: 'cloud_done'
-      })
+      console.log('salvar executado')
     }
   }
 }
