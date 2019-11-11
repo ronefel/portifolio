@@ -56,7 +56,7 @@
       <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
         <div class="absolute-bottom bg-transparent">
           <q-avatar size="56px" class="q-mb-sm">
-            <img src="~assets/perfil.jpg" />
+            <img src="img/perfil.jpg" />
           </q-avatar>
           <div class="text-weight-bold">Krys Cardoso</div>
           <div>@krys.cardoso_makeup_artist</div>
