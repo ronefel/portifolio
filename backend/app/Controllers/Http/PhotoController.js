@@ -1,8 +1,6 @@
 'use strict'
 
-const fs = use('fs')
-const Helpers = use('Helpers')
-const readFile = Helpers.promisify(fs.readFile)
+const ImageLib = use('App/Libs/ImageLib')
 
 const Model = use('App/Models/Photo')
 
@@ -13,20 +11,20 @@ class PhotoController {
   }
 
   async store ({ request }) {
-    const files = request.file('files', {
+    const file = request.file('file', {
       types: ['image'],
-      size: '5mb'
+      size: '8mb'
     })
-    console.log(files)
-    await files.moveAll(Helpers.appRoot('photos'))
-    const data = request.only(['name', 'gallery_id'])
+    const newNameFile = await ImageLib.processAndStorageImage(file.tmpPath)
+    const data = request.only(['gallery_id'])
+    data.name = newNameFile
     const model = await Model.create(data)
     return model
   }
 
   async show ({ params, response }) {
     response.header('Content-type', 'image/jpeg')
-    return await readFile(Helpers.appRoot('\photos\\'+params.name))
+    return await ImageLib.readImage(params.name)
   }
 
   async update ({ params, request }) {
