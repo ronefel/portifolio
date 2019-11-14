@@ -9,7 +9,7 @@ class PhotoSchema extends Schema {
       table.increments()
       table.integer('gallery_id').unsigned().notNullable().references('id').inTable('galleries')
       table.string('name', 100).notNullable()
-      table.timestamps()
+      table.timestamp('created_at').defaultTo(this.fn.now())
     })
   }
 
