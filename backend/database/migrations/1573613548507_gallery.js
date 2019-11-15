@@ -4,15 +4,15 @@
 const Schema = use('Schema')
 
 class GallerySchema extends Schema {
-  up () {
-    this.create('galleries', (table) => {
+  up() {
+    this.create('galleries', table => {
       table.increments()
       table.string('name', 100).notNullable()
       table.timestamps()
     })
   }
 
-  down () {
+  down() {
     this.drop('galleries')
   }
 }

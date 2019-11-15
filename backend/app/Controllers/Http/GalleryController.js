@@ -3,24 +3,23 @@
 const Model = use('App/Models/Gallery')
 
 class GalleryController {
-
-  async index () {
+  async index() {
     const models = await Model.all()
     return models
   }
 
-  async store ({ request }) {
+  async store({ request }) {
     const data = request.only(['name'])
     const model = await Model.create(data)
     return model
   }
 
-  async show ({ params }) {
+  async show({ params }) {
     const model = await Model.findOrFail(params.id)
     return model
   }
 
-  async update ({ params, request }) {
+  async update({ params, request }) {
     const data = request.only(['name'])
     const model = await Model.findOrFail(params.id)
     model.merge(data)
@@ -28,7 +27,7 @@ class GalleryController {
     return model
   }
 
-  async destroy ({ params, request, response }) {
+  async destroy({ params, request, response }) {
     const model = await Model.findOrFail(params.id)
     await model.delete()
   }

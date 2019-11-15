@@ -4,7 +4,9 @@ const Route = use('Route')
 Route.post('authenticate', 'AuthController.authenticate')
 Route.resource('users', 'UserController').apiOnly()
 Route.resource('galleries', 'GalleryController').apiOnly()
-Route.resource('photos', 'PhotoController').apiOnly().except('show')
+Route.resource('photos', 'PhotoController')
+  .apiOnly()
+  .except('show')
 Route.get('/photo/:name', 'PhotoController.show')
 
 // rota protegida exemplo

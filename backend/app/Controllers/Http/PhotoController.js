@@ -5,12 +5,12 @@ const ImageLib = use('App/Libs/ImageLib')
 const Model = use('App/Models/Photo')
 
 class PhotoController {
-  async index () {
+  async index() {
     const models = await Model.all()
     return models
   }
 
-  async store ({ request }) {
+  async store({ request }) {
     const file = request.file('file', {
       types: ['image'],
       size: '8mb'
@@ -22,12 +22,12 @@ class PhotoController {
     return model
   }
 
-  async show ({ params, response }) {
+  async show({ params, response }) {
     response.header('Content-type', 'image/jpeg')
-    return await ImageLib.readImage(params.name)
+    return ImageLib.readImage(params.name)
   }
 
-  async update ({ params, request }) {
+  async update({ params, request }) {
     const data = request.only(['name'])
     const model = await Model.findOrFail(params.id)
     model.merge(data)
@@ -35,7 +35,7 @@ class PhotoController {
     return model
   }
 
-  async destroy ({ params, request, response }) {
+  async destroy({ params, request, response }) {
     const model = await Model.findOrFail(params.id)
     await model.delete()
   }
