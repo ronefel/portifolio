@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix app config database start --ext .js",
-    "start": "node server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
     "test": "node ace test"
   },
   "keywords": [

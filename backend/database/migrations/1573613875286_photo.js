@@ -14,7 +14,7 @@ class PhotoSchema extends Schema {
         .references('id')
         .inTable('galleries')
       table.string('name', 100).notNullable()
-      table.timestamps()
+      table.timestamp('created_at').defaultTo(this.fn.now())
     })
   }
 
