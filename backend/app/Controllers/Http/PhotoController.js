@@ -11,8 +11,7 @@ class PhotoController {
     return models
   }
 
-  async store ({ request, response }) {
-    
+  async store({ request, response }) {
     const data = request.only(['gallery_id'])
 
     // Se não achar o id da galeria informada retorna um erro
@@ -25,13 +24,17 @@ class PhotoController {
 
     const jimpImage = await ImageLib.processImage(file.tmpPath)
     if (!jimpImage) {
-      return response.status(500).json({"error": {'code': 500, 'message': 'Error to process image.'}})
+      return response
+        .status(500)
+        .json({ error: { code: 500, message: 'Error to process image.' } })
     }
 
-    const name = (new Date()).getTime() + '.jpg'
+    const name = new Date().getTime() + '.jpg'
     const nameImageStored = await ImageLib.storeImage(jimpImage, name)
     if (!nameImageStored) {
-      return response.status(500).json({"error": {'code': 500, 'message': 'Error to store image on server.'}})
+      return response.status(500).json({
+        error: { code: 500, message: 'Error to store image on server.' }
+      })
     }
 
     data.name = nameImageStored
@@ -41,18 +44,25 @@ class PhotoController {
     } catch (error) {
       await ImageLib.destroyImage(nameImageStored)
 
-      return response.status(500).json({"error": {'code': 500, 'message': 'Error to insert image information on the database. The image has not been saved.'}})
+      return response.status(500).json({
+        error: {
+          code: 500,
+          message:
+            'Error to insert image information on the database. The image has not been saved.'
+        }
+      })
     }
-
   }
 
-  async show ({ params, response }) {
+  async show({ params, response }) {
     const image = await ImageLib.readImage(params.name)
     if (image) {
       response.header('Content-type', 'image/jpeg')
       return image
     }
-    return response.status(404).json({"error": {'code': 404, 'message': 'Image not found.'}})
+    return response
+      .status(404)
+      .json({ error: { code: 404, message: 'Image not found.' } })
   }
 
   async destroy({ params, request, response }) {

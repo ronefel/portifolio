@@ -9,29 +9,32 @@ const Jimp = use('jimp')
 const path = Helpers.appRoot('photos')
 
 class ImageLib {
-  
   static async processImage(file) {
-
-    const optimizeAndResize = async (img) => {
+    const optimizeAndResize = async img => {
       await img.resize(1080, Jimp.AUTO)
       await img.quality(90)
       return img
     }
 
-    const image = await Jimp.read(file).then((img) => {
-      return optimizeAndResize(img)
-    }).catch(() => {
-      return false
-    })
+    const image = await Jimp.read(file)
+      .then(img => {
+        return optimizeAndResize(img)
+      })
+      .catch(() => {
+        return false
+      })
     return image
   }
 
   static async storeImage(jimpImage, name) {
-    const image = await jimpImage.writeAsync(path+'/'+name).then((img) => {
-      return img
-    }).catch(() => {
-      return false
-    })
+    const image = await jimpImage
+      .writeAsync(path + '/' + name)
+      .then(img => {
+        return img
+      })
+      .catch(() => {
+        return false
+      })
     if (image) {
       return name
     }
@@ -39,19 +42,23 @@ class ImageLib {
   }
 
   static async readImage(name) {
-    return await readFile(path+'/'+name).then((image) => {
-      return image
-    }).catch(() => {
-      return false
-    })
+    return readFile(path + '/' + name)
+      .then(image => {
+        return image
+      })
+      .catch(() => {
+        return false
+      })
   }
 
   static async destroyImage(name) {
-    return await deleteFile(path+'/'+name).then(() => {
-      return true
-    }).catch(() => {
-      return false
-    })
+    return deleteFile(path + '/' + name)
+      .then(() => {
+        return true
+      })
+      .catch(() => {
+        return false
+      })
   }
 }
 

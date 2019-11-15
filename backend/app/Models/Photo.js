@@ -4,7 +4,7 @@
 const Model = use('Model')
 
 class Photo extends Model {
-  static get updatedAtColumn () {
+  static get updatedAtColumn() {
     return null
   }
 }
