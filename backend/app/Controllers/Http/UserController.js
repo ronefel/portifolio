@@ -1,5 +1,3 @@
-'use strict'
-
 const Model = use('App/Models/User')
 
 class UserController {
@@ -27,7 +25,7 @@ class UserController {
     return model
   }
 
-  async destroy({ params, request, response }) {
+  async destroy({ params }) {
     const model = await Model.findOrFail(params.id)
     await model.delete()
   }

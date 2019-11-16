@@ -1,5 +1,3 @@
-'use strict'
-
 const Model = use('App/Models/Gallery')
 
 class GalleryController {
@@ -27,7 +25,7 @@ class GalleryController {
     return model
   }
 
-  async destroy({ params, request, response }) {
+  async destroy({ params }) {
     const model = await Model.findOrFail(params.id)
     await model.delete()
   }

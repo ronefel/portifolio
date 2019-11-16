@@ -1,5 +1,3 @@
-'use strict'
-
 class NoTimestamp {
   register(Model) {
     Object.defineProperties(Model, {

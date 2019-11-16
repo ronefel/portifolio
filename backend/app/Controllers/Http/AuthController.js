@@ -1,5 +1,3 @@
-'use strict'
-
 class AuthController {
   async authenticate({ request, auth }) {
     const { email, password } = request.all()

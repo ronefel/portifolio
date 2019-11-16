@@ -1,12 +1,13 @@
-'use strict'
-
 const fs = use('fs')
 const Helpers = use('Helpers')
 const readFile = Helpers.promisify(fs.readFile)
 const deleteFile = Helpers.promisify(fs.unlink)
 const Jimp = use('jimp')
 
-const path = Helpers.appRoot('photos')
+/** @type {import('@adonisjs/framework/src/Env')} */
+const Env = use('Env')
+
+const path = Helpers.appRoot(`${Env.get('IMAGES_PATH')}`)
 
 class ImageLib {
   static async processImage(file) {
@@ -28,7 +29,7 @@ class ImageLib {
 
   static async storeImage(jimpImage, name) {
     const image = await jimpImage
-      .writeAsync(path + '/' + name)
+      .writeAsync(`${path}/${name}`)
       .then(img => {
         return img
       })
@@ -42,7 +43,7 @@ class ImageLib {
   }
 
   static async readImage(name) {
-    return readFile(path + '/' + name)
+    return readFile(`${path}/${name}`)
       .then(image => {
         return image
       })
@@ -51,8 +52,12 @@ class ImageLib {
       })
   }
 
+  static getPath(name) {
+    return (`${path}/${name}`)
+  }
+
   static async destroyImage(name) {
-    return deleteFile(path + '/' + name)
+    return deleteFile(`${path}/${name}`)
       .then(() => {
         return true
       })

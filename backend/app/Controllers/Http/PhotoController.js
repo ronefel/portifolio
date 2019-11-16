@@ -1,9 +1,8 @@
-'use strict'
-
+/** @type {typeof import('../../Libs/ImageLib')} */
 const ImageLib = use('App/Libs/ImageLib')
 
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('App/Models/Photo')
-const Gallery = use('App/Models/Gallery')
 
 class PhotoController {
   async index() {
@@ -14,58 +13,47 @@ class PhotoController {
   async store({ request, response }) {
     const data = request.only(['gallery_id'])
 
-    // Se não achar o id da galeria informada retorna um erro
-    await Gallery.findOrFail(data.gallery_id)
-
+    // pega a imagem da request
     const file = request.file('file', {
       types: ['image'],
-      size: '8mb'
+      size: '10mb'
     })
 
+    // redimenciona e otimiza a imagem
     const jimpImage = await ImageLib.processImage(file.tmpPath)
     if (!jimpImage) {
-      return response
-        .status(500)
-        .json({ error: { code: 500, message: 'Error to process image.' } })
+      return response.status(500).json({
+        message: 'Error to process image.',
+        name: 'error',
+        status: 500
+      })
     }
 
-    const name = new Date().getTime() + '.jpg'
+    // gera um nome para a imagem
+    const name = `${new Date().getTime()}.jpg`
+    data.name = name
+    //Salva os dados no banco
+    const model = await Model.create(data)
+
+    // salva a imagem no servidor
     const nameImageStored = await ImageLib.storeImage(jimpImage, name)
     if (!nameImageStored) {
+      // remove os dados do banco
+      await model.delete()
       return response.status(500).json({
-        error: { code: 500, message: 'Error to store image on server.' }
+        message: 'Error to store image on server.',
+        name: 'error',
+        status: 500
       })
     }
-
-    data.name = nameImageStored
-
-    try {
-      return await Model.create(data)
-    } catch (error) {
-      await ImageLib.destroyImage(nameImageStored)
-
-      return response.status(500).json({
-        error: {
-          code: 500,
-          message:
-            'Error to insert image information on the database. The image has not been saved.'
-        }
-      })
-    }
+    return model
   }
 
   async show({ params, response }) {
-    const image = await ImageLib.readImage(params.name)
-    if (image) {
-      response.header('Content-type', 'image/jpeg')
-      return image
-    }
-    return response
-      .status(404)
-      .json({ error: { code: 404, message: 'Image not found.' } })
+    return response.download(ImageLib.getPath(params.name))
   }
 
-  async destroy({ params, request, response }) {
+  async destroy({ params }) {
     const model = await Model.findOrFail(params.id)
     await model.delete()
   }
